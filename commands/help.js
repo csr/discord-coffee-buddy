@@ -7,7 +7,7 @@ const { Message, MessageEmbed } = require('discord.js');
  * @param {*} args
  */
 const run = (message, args) => {
-    const prefix = process.env.PREFIX;
+    const prefix = process.env.PREFIX || '!';
     const embed = new MessageEmbed({
         setTitle: 'Coffee Buddy Commands!',
         setDescription: 'Here is the list of commands available for you to interact with this bot',
