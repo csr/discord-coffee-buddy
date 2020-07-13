@@ -1,17 +1,23 @@
 require('dotenv').config();
+const fs = require('fs');
+const path = require('path');
 const Discord = require('discord.js');
+const path = require('path');
 const client = new Discord.Client();
 
 // Use exclamation mark as the default prefix
 const prefix = process.env.PREFIX || '!';
 
 client.on('message', message => {
+    // Ignore messages that aren't for this bot to bother
+    if (!message.content.startsWith(prefix)) return;
     // Ignore other bot messages
     if (message.author.bot) return;
-
     // Ignore messages in public places (for now)
     if (message.channel.type !== 'dm') return;
 
+    // Remove irc username suffix
+    const messageContent = message.content.replace(/<.*> /, '');
     let args = messageContent
         .slice(prefix.length)
         .trim()
@@ -19,15 +25,16 @@ client.on('message', message => {
     const command = args.shift().toLowerCase();
     args = args.join(' ');
 
-    // Send welcome if it's the first time user messages bot
-    message.channel.messages.fetch().then(messages => {
-        const botMessages = messages.filter(msg => msg.author.bot);
-        if (botMessages.size === 0) {
-            return message.author.send(`👋😃 Hello! \n\nI'm here to help you get to know new Fellows from other Pods. If you decide to participate, I'll pair you with a new person every week for a short, informal, and fun 1-on-1. It's a great way to get to know more people when working remotely! 🙌\n\nAll you have to do is reply here with \`start\`. You'll be to able \`stop\` anytime.`);
-        }
-    }).catch(err => {
-        console.log(err);
-    });
+    let commandRegistery = [];
+    const commandsFile = fs.readdirSync(path.join(__dirname, '/commands/'));
+    for (file of commandsFile) {
+        const handler = require(path.join(__dirname, '/commands/', file));
+        commandRegistery.push({ ...handler });
+    }
+
+    // TODO: Prevent program from crashing if user enters unknown command
+    const handleCommand = commandRegistery.find(element => element.name === command);
+    handleCommand.run(message); // Run the command's run function
 });
 
 client.once('ready', () =>  console.log('The bot is now ready!'));

@@ -49,6 +49,6 @@ const run = (message) => {
 
 module.exports = {
     run,
-    command: 'help',
+    name: 'help',
     description: 'Displays list of commands'
 };
