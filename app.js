@@ -11,7 +11,7 @@ client.login(process.env.BOT_TOKEN);
 // Use exclamation mark as the default prefix
 const prefix = process.env.PREFIX || '!';
 
-const help = '**Bot commands**\n✨ Start pairings with `!start`\n🛑 Stop pairings with `!stop`\n💖 Set your pronouns with `!pronouns PRONOUNS`\n 💻 Share your GitHub profile with `!github GITHUB_URL`\n💼 Share your LinkedIn profile with `!linkedin LINKEDIN_URL`\n🐙 Share a fun fact about yourself with `!funfact FUN_FACT`\n❔ Show this menu with `!help`';
+const help = '**Bot commands**\n✨ Start pairings with `!start`\n🛑 Stop pairings with `!stop`\n💖 Set your pronouns with `!pronouns PRONOUNS`\n💻 Share your GitHub profile with `!github GITHUB_URL`\n💼 Share your LinkedIn profile with `!linkedin LINKEDIN_URL`\n🐙 Share a fun fact about yourself with `!funfact FUN_FACT`\n❔ Show this menu with `!help`';
 
 client.on('message', message => {
     // Ignore other bot messages
@@ -61,11 +61,6 @@ client.on('message', message => {
     }
 
     if (response === null) return;
-
-    if (response.error) {
-        message.author.send(response.error.message);
-        return;
-    }
 
     // Send welcome if it's the first time user messages bot
     message.channel.messages.fetch().then(messages => {
