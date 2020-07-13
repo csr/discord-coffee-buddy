@@ -2,11 +2,10 @@ require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 const Discord = require('discord.js');
-const path = require('path');
-const client = new Discord.Client();
 
 // Use exclamation mark as the default prefix
 const prefix = process.env.PREFIX || '!';
+const client = new Discord.Client();
 
 client.on('message', message => {
     // Ignore messages that aren't for this bot to bother
@@ -34,7 +33,7 @@ client.on('message', message => {
 
     // TODO: Prevent program from crashing if user enters unknown command
     const handleCommand = commandRegistery.find(element => element.name === command);
-    handleCommand.run(message); // Run the command's run function
+    handleCommand.run(message, args); // Run the command's run function
 });
 
 client.once('ready', () =>  console.log('The bot is now ready!'));

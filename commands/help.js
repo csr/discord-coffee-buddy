@@ -4,41 +4,42 @@ const { Message, MessageEmbed } = require('discord.js');
 /**
  * 
  * @param {Message} message 
+ * @param {*} args
  */
-const run = (message) => {
+const run = (message, args) => {
     const prefix = process.env.PREFIX;
     const embed = new MessageEmbed({
         setTitle: 'Coffee Buddy Commands!',
         setDescription: 'Here is the list of commands available for you to interact with this bot',
         fields: [
             {
-                name: '✨ Start the pairing session',
-                value: prefix + 'start',
+                value: '✨ Start the pairing session',
+                name: prefix + 'start',
                 inline: true
             },
             {
-                name: '🛑 Stop the pairing session',
-                value: prefix + 'stop',
+                value: '🛑 Stop the pairing session',
+                name: prefix + 'stop',
                 inline: true
             },
             {
-                name: '💖 Set your pronouns',
-                value: prefix + 'pronouns <pronun>',
+                value: '💖 Set your pronouns',
+                name: prefix + 'pronouns <pronun>',
                 inline: true
             },
             {
-                name: '💻 Share your GitHub profile',
-                value: prefix + 'github <url>',
+                value: '💻 Share your GitHub profile',
+                name: prefix + 'github <url>',
                 inline: true
             },
             {
-                name: '💼 Share your LinkedIn profile',
-                value: prefix + 'linkedin <url>',
+                value: '💼 Share your LinkedIn profile',
+                name: prefix + 'linkedin <url>',
                 inline: true
             },
             {
-                name: '🐙 Share a fun fact about yourself',
-                value: prefix + 'funfact <your fun fact>',
+                value: '🐙 Share a fun fact about yourself',
+                name: prefix + 'funfact <your fun fact>',
                 inline: true
             }
         ]
