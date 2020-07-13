@@ -7,16 +7,17 @@ class UserService extends BaseService {}
 svc = new UserService(User);
 
 // Sample use case
-// const xyz = async () => {
-//     try {
-//         // const r = await svc.create({ discord_id: '12323123' });
-//         const w = await svc.findOne({
-//             discord_id: '12323123',
-//         });
-//         console.log(w);
-//     } catch (e) {
-//         throw e;
-//     }
-// };
+const xyz = async () => {
+    try {
+        // const r = await svc.create({ discord_id: '12323123' });
+        const w = await svc.create({
+            discord_id: '12',
+            enrolled: true,
+        });
+        console.log(w);
+    } catch (e) {
+        throw e;
+    }
+};
 
-// xyz();
+xyz();
