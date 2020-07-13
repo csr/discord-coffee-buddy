@@ -9,6 +9,9 @@ const sequelize = new Sequelize(DB_NAME,DB_USERNAME,DB_PASSWORD,{
     dialect:"mysql"
 })
 
-module.exports = {
-    sequelize
+try {
+    sequelize.authenticate()
+}
+catch(e){
+    console.log(e)
 }
