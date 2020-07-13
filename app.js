@@ -24,15 +24,15 @@ client.on('message', message => {
     const command = args.shift().toLowerCase();
     args = args.join(' ');
 
-    let commandRegistery = [];
+    let commandRegistry = [];
     const commandsFile = fs.readdirSync(path.join(__dirname, '/commands/'));
     for (file of commandsFile) {
         const handler = require(path.join(__dirname, '/commands/', file));
-        commandRegistery.push({ ...handler });
+        commandRegistry.push({ ...handler });
     }
 
     // TODO: Prevent program from crashing if user enters unknown command
-    const handleCommand = commandRegistery.find(element => element.name === command);
+    const handleCommand = commandRegistry.find(element => element.name === command);
     handleCommand.run(message, args); // Run the command's run function
 });
 
