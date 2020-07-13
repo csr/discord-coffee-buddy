@@ -20,6 +20,8 @@
   "dependencies": {
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0",
-    "eslint": "^7.4.0"
+    "eslint": "^7.4.0",
+    "mysql2": "^2.1.0",
+    "sequelize": "^6.3.3"
   }
 }
