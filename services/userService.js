@@ -8,6 +8,7 @@ class UserService extends BaseService {
         return updatedBody;
     };
 }
+module.exports = { UserService };
 
 // Sample use
 // svc = new UserService(User);
