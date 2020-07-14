@@ -11,44 +11,41 @@ const createChannel = async (client, userOne, userTwo) => {
     const parentName = 'Coffee Buddy';
     const guild = client.guilds.cache.get(process.env.GUILD_ID);
     const parent = guild.channels.cache.find(c => c.name == parentName && c.type == 'category');
-    const permissionOverwrites = [
-        {
-            id: userOne,
-            allow: ['VIEW_CHANNEL'],        
-        },
-        {
-            id: userTwo,
-            allow: ['VIEW_CHANNEL'],        
-        }
-    ];
+    const channelPermission = { 'VIEW_CHANNEL': false };
+    const channelOptions = {
+        parent,
+        reason: 'Coffee buddies!',
+        permissionOverwrites: [
+            {
+                id: userOne,
+                allow: ['VIEW_CHANNEL'],        
+            },
+            {
+                id: userTwo,
+                allow: ['VIEW_CHANNEL'],        
+            }
+        ]
+    };
 
     if (!parent) {
         return console.log('No category found to create channels on');
     }
 
-    const textChannel = await guild.channels.create('coffee-buddy-meet', { 
-        parent,
-        type: 'text',
-        permissionOverwrites,
-        reason: 'Coffee buddies!'
+    const userOneObj = await client.users.fetch(userOne);
+    const userTwoObj = await client.users.fetch(userTwo);
+
+    const textChannel = await guild.channels.create(`${userOneObj.username}-${userTwoObj.username}`, {
+        ...channelOptions,
+        type: 'text'
     });
-    textChannel.updateOverwrite(textChannel.guild.roles.everyone, {
-        'VIEW_CHANNEL': false
+    const voiceChannel = await guild.channels.create(`${userOneObj.username}-${userTwoObj.username}`, { 
+        ...channelOptions,
+        type: 'voice'
     });
 
-    const userOneName = await client.users.fetch(userOne);
-    const userTwoName = await client.users.fetch(userTwo);
-    textChannel.send(`Hello, welcome @${userOneName} and @${userTwoName}! ✨`);
-
-    const voiceChannel = await guild.channels.create('coffee-buddy-meet', { 
-        parent,
-        type: 'voice',
-        permissionOverwrites,
-        reason: 'Coffee buddies!'
-    });
-    voiceChannel.updateOverwrite(textChannel.guild.roles.everyone, {
-        'VIEW_CHANNEL': false
-    });
+    textChannel.updateOverwrite(textChannel.guild.roles.everyone, channelPermission);
+    voiceChannel.updateOverwrite(textChannel.guild.roles.everyone, channelPermission);
+    textChannel.send(`Hello, welcome @${userOneObj.username} and @${userTwoObj.username}! ✨`);
 }
 
 module.exports = createChannel;
