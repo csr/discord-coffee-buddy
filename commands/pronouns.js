@@ -17,7 +17,7 @@ const run = async (message, args) => {
         });
         message.author.send('Yay! We have set your pronouns to ' + args);
     } catch (error) {
-        message.author.send(e.message);
+        message.author.send(error.message);
     }
 };
 
