@@ -1,5 +1,12 @@
+
+
 require('dotenv').config();
 const { Message } = require('discord.js');
+const { userService } = require('./services/userService.js');
+const { User } = require('../models');
+
+const svc = new UserService(User);
+
 
 /**
  * 
@@ -7,7 +14,10 @@ const { Message } = require('discord.js');
  * @param {*} args
  */
 const run = (message, args) => {
-    message.author.send('Yay! It is happy to see you. You are now enrolled 😃');
+    svc.create({
+        discordId: message.author.id,
+    });
+message.author.send('Yay! It is happy to see you. You are now enrolled 😃');
 }
 
 module.exports = {
