@@ -2,22 +2,31 @@
 // const { User } = sequelize.models;
 const { User } = require('../models');
 const { BaseService } = require('./baseService');
-class UserService extends BaseService {}
+class UserService extends BaseService {
+    updateByDiscordId = async (discordId, updateBody) => {
+        const updatedBody = await this.update(updateBody, { discordId });
+        return updatedBody;
+    };
+}
 
-svc = new UserService(User);
+// Sample use
+// svc = new UserService(User);
+// const xyz = async (id) => {
+//     try {
+//         const w = await svc.create({
+//             discordId: id,
+//         });
+//         // changing enroll status, updating linkedin and adding funfact.
+//         await svc.updateByDiscordId(id, {
+//             linkedin: 'www.linkedin.com/ksdk',
+//             funfact: 'Random funfact',
+//             enrolled:true
+//         });
+//         const www = await svc.findOne({ discordId: id });
+//         console.log(www);
+//     } catch (e) {
+//         throw e;
+//     }
+// };
 
-// Sample use case
-const xyz = async () => {
-    try {
-        // const r = await svc.create({ discord_id: '12323123' });
-        const w = await svc.create({
-            discord_id: '12',
-            enrolled: true,
-        });
-        console.log(w);
-    } catch (e) {
-        throw e;
-    }
-};
-
-xyz();
+// xyz();
