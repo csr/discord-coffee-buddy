@@ -20,6 +20,9 @@ class BaseService {
                     ...query,
                 },
             });
+            if (obj == null) {
+                throw new Error('Not found');
+            }
             return obj.toJSON();
         } catch (error) {
             throw new Error(this.prettifyError(error));

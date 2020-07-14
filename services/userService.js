@@ -3,7 +3,17 @@
 const { User } = require('../models');
 const { BaseService } = require('./baseService');
 class UserService extends BaseService {
+    assertUserIsRegistered = async (discordId) => {
+        try {
+            await this.findOne({ discordId });
+        } catch (e) {
+            throw new Error(
+                "It seems you're not registered. Type `!start` to register right away!"
+            );
+        }
+    };
     updateByDiscordId = async (discordId, updateBody) => {
+        await this.assertUserIsRegistered();
         const updatedBody = await this.update(updateBody, { discordId });
         return updatedBody;
     };
