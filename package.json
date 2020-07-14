@@ -1,29 +1,32 @@
 {
-  "name": "discord-coffee-buddy",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
-  "scripts": {
-    "start": "node .",
-    "watch": "nodemon ."
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/csr/discord-coffee-buddy.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/csr/discord-coffee-buddy/issues"
-  },
-  "homepage": "https://github.com/csr/discord-coffee-buddy#readme",
-  "dependencies": {
-    "discord.js": "^12.2.0",
-    "dotenv": "^8.2.0",
-    "eslint": "^7.4.0"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.4"
-  }
+    "name": "discord-coffee-buddy",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "scripts": {
+        "start": "node .",
+        "watch": "nodemon ."
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/csr/discord-coffee-buddy.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/csr/discord-coffee-buddy/issues"
+    },
+    "homepage": "https://github.com/csr/discord-coffee-buddy#readme",
+    "dependencies": {
+        "discord.js": "^12.2.0",
+        "dotenv": "^8.2.0",
+        "mysql2": "^2.1.0",
+        "sequelize": "^6.3.3"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.4",
+        "sequelize-cli": "^6.2.0",
+        "eslint": "^7.4.0"
+    }
 }
