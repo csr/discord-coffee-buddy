@@ -15,12 +15,12 @@ module.exports = (sequelize, DataTypes) => {
   };
   User.init({
     username: DataTypes.STRING,
+    discordId: DataTypes.STRING,
     linkedin: DataTypes.STRING,
     github: DataTypes.STRING,
     funfact: DataTypes.STRING,
     pronouns: DataTypes.STRING,
-    enrolled: DataTypes.BOOLEAN,
-    discord_id: DataTypes.STRING
+    enrolled: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'User',

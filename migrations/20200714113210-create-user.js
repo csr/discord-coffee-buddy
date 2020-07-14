@@ -11,25 +11,30 @@ module.exports = {
             username: {
                 type: Sequelize.STRING,
             },
-            linkedin: {
-                type: Sequelize.STRING,
-            },
-            github: {
-                type: Sequelize.STRING,
-            },
-            funfact: {
-                type: Sequelize.STRING,
-            },
-            pronouns: {
-                type: Sequelize.STRING,
-            },
-            enrolled: {
-                type: Sequelize.BOOLEAN,
-            },
-            discord_id: {
+            discordId: {
                 type: Sequelize.STRING,
                 allowNull: false,
                 unique: true,
+            },
+            linkedin: {
+                type: Sequelize.STRING,
+                default: '',
+            },
+            github: {
+                type: Sequelize.STRING,
+                default: '',
+            },
+            funfact: {
+                type: Sequelize.STRING,
+                default: '',
+            },
+            pronouns: {
+                type: Sequelize.STRING,
+                default: '',
+            },
+            enrolled: {
+                type: Sequelize.BOOLEAN,
+                default: true,
             },
             createdAt: {
                 allowNull: false,
