@@ -18,11 +18,11 @@ const createChannel = async (client, userOne, userTwo) => {
         permissionOverwrites: [
             {
                 id: userOne,
-                allow: ['VIEW_CHANNEL'],        
+                allow: ['VIEW_CHANNEL'],
             },
             {
                 id: userTwo,
-                allow: ['VIEW_CHANNEL'],        
+                allow: ['VIEW_CHANNEL'],
             }
         ]
     };
@@ -45,7 +45,7 @@ const createChannel = async (client, userOne, userTwo) => {
 
     textChannel.updateOverwrite(textChannel.guild.roles.everyone, channelPermission);
     voiceChannel.updateOverwrite(textChannel.guild.roles.everyone, channelPermission);
-    textChannel.send(`Hello, welcome @${userOneObj.username} and @${userTwoObj.username}! ✨`);
+    textChannel.send(`Hello, welcome ${userOneObj} and ${userTwoObj}! ✨`);
 }
 
 module.exports = createChannel;
