@@ -8,8 +8,8 @@ const createChannel = require('../helpers/create-channel');
  * @param {*} args
  */
 const run = (message, args) => {
-    const userID1 = '638473299072122900';
-    const userID2 = '732503637296939058';
+    const userID1 = '229858084493721600';
+    const userID2 = '638473299072122900';
 
     return createChannel(message.client, userID1, userID2);
 }

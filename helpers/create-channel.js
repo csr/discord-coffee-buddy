@@ -10,8 +10,15 @@ const { Client } = require('discord.js');
 const createChannel = async (client, userOne, userTwo) => {
     const parentName = 'Coffee Buddy';
     const guild = client.guilds.cache.get(process.env.GUILD_ID);
-    const parent = guild.channels.cache.find(c => c.name == parentName && c.type == 'category');
     const channelPermission = { 'VIEW_CHANNEL': false };
+
+    let parent = guild.channels.cache.find(c => c.name == parentName && c.type == 'category');
+    if (!parent) {
+        parent = await guild.channels.create(parentName, { type: 'category' });
+    }
+
+    const userOneObj = await client.users.fetch(userOne);
+    const userTwoObj = await client.users.fetch(userTwo);
     const channelOptions = {
         parent,
         reason: 'Coffee buddies!',
@@ -26,13 +33,6 @@ const createChannel = async (client, userOne, userTwo) => {
             }
         ]
     };
-
-    if (!parent) {
-        return console.log('No category found to create channels on');
-    }
-
-    const userOneObj = await client.users.fetch(userOne);
-    const userTwoObj = await client.users.fetch(userTwo);
 
     const textChannel = await guild.channels.create(`${userOneObj.username}-${userTwoObj.username}`, {
         ...channelOptions,
