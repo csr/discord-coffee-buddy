@@ -14,7 +14,6 @@ const run = async (message, args) => {
     try {
         await svc.createUser({
             discordId: message.author.id,
-            enrolled: true,
         });
         message.author.send(
             'Yay! It is happy to see you. You are now enrolled 😃'
