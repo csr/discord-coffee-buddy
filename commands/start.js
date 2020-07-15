@@ -12,7 +12,7 @@ const svc = new UserService(User);
  */
 const run = async (message, args) => {
     try {
-        await svc.create({
+        await svc.createUser({
             discordId: message.author.id,
             enrolled: true,
         });
