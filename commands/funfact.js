@@ -6,8 +6,8 @@ const { User } = require('../models');
 const svc = new UserService(User);
 
 /**
- * 
- * @param {Message} message 
+ *
+ * @param {Message} message
  * @param {*} args
  */
 const run = async (message, args) => {
@@ -15,7 +15,7 @@ const run = async (message, args) => {
         await svc.updateByDiscordId(message.author.id, {
             funfact: args,
         });
-        message.author.send('Yay! We have set your funfact as ' + args);
+        message.author.send(`Yay! We have set your funfact as to \`${args}\``);
     } catch (error) {
         message.author.send(error.message);
     }
@@ -24,5 +24,5 @@ const run = async (message, args) => {
 module.exports = {
     run,
     name: 'funfact',
-    description: 'Say us our funfact.'
+    description: 'Say us our funfact.',
 };

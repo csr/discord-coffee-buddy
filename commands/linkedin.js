@@ -6,8 +6,8 @@ const { User } = require('../models');
 const svc = new UserService(User);
 
 /**
- * 
- * @param {Message} message 
+ *
+ * @param {Message} message
  * @param {*} args
  */
 const run = async (message, args) => {
@@ -15,7 +15,9 @@ const run = async (message, args) => {
         await svc.updateByDiscordId(message.author.id, {
             linkedin: args,
         });
-        message.author.send('Yay! We have set your linkedin profile to ' + args);
+        message.author.send(
+            `Yay! We have set your linkedin profile to \`${args}\``
+        );
     } catch (error) {
         message.author.send(error.message);
     }
@@ -24,5 +26,5 @@ const run = async (message, args) => {
 module.exports = {
     run,
     name: 'linkedin',
-    description: 'Set your linkedin profile URL'
+    description: 'Set your linkedin profile URL',
 };
