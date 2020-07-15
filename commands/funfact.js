@@ -15,7 +15,7 @@ const run = async (message, args) => {
         await svc.updateByDiscordId(message.author.id, {
             funfact: args,
         });
-        message.author.send(`Yay! We have set your funfact as to \`${args}\``);
+        message.author.send('Yay! We have set your funfact as to' + args);
     } catch (error) {
         message.author.send(error.message);
     }
