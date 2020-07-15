@@ -1,11 +1,18 @@
 require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
+const cron = require('node-cron');
 const Discord = require('discord.js');
+const scheduler = require('./helpers/scheduler');
 
 // Use exclamation mark as the default prefix
 const prefix = process.env.PREFIX || '!';
 const client = new Discord.Client();
+
+// Run this function every monday
+cron.schedule('* * * * * 1', () => {
+    scheduler(client);
+});
 
 client.on('message', message => {
     // Ignore messages that aren't for this bot to bother

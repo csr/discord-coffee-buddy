@@ -22,11 +22,13 @@
         "discord.js": "^12.2.0",
         "dotenv": "^8.2.0",
         "mysql2": "^2.1.0",
+        "node-cron": "^2.0.3",
         "sequelize": "^6.3.3"
     },
     "devDependencies": {
+        "@types/node-cron": "^2.0.3",
+        "eslint": "^7.4.0",
         "nodemon": "^2.0.4",
-        "sequelize-cli": "^6.2.0",
-        "eslint": "^7.4.0"
+        "sequelize-cli": "^6.2.0"
     }
 }
