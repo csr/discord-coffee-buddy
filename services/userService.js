@@ -28,12 +28,12 @@ class UserService extends BaseService {
         }
         return error;
     };
-    createUser = async ({ discordId }) => {
+    createUser = async ({ discordId, username }) => {
         const user = await this.userExists(discordId);
         if (user && user.enrolled) {
             throw new Error('You are already enrolled! 😃');
         } else if (!user) {
-            await this.create({ discordId, enrolled: true });
+            await this.create({ discordId, username, enrolled: true });
         } else if (user && !user.enrolled) {
             await this.update({ enrolled: true }, { discordId });
         }
