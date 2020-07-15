@@ -15,7 +15,7 @@ const run = async (message, args) => {
         await svc.updateByDiscordId(message.author.id, {
             linkedin: args,
         });
-        message.author.send('Yay! We have set your linkedin profile to' + args);
+        message.author.send('Yay! We have set your linkedin profile to ' + args);
     } catch (error) {
         message.author.send(error.message);
     }
