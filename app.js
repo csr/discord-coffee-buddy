@@ -9,11 +9,6 @@ const scheduler = require('./helpers/scheduler');
 const prefix = process.env.PREFIX || '!';
 const client = new Discord.Client();
 
-// Run this function every monday
-cron.schedule('* * * * * 1', () => {
-    scheduler(client);
-});
-
 client.on('message', message => {
     // Ignore messages that aren't for this bot to bother
     if (!message.content.startsWith(prefix)) return;
@@ -43,5 +38,11 @@ client.on('message', message => {
     handleCommand.run(message, args); // Run the command's run function
 });
 
-client.once('ready', () =>  console.log('The bot is now ready!'));
 client.login(process.env.BOT_TOKEN);
+client.once('ready', () =>  {
+    console.log('The bot is now ready!');
+    // Runs this function every minute (for testing purposes)
+    cron.schedule('1 * * * * *', () => {
+        scheduler(client);
+    });
+});
