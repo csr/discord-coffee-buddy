@@ -11,10 +11,11 @@ const svc = new UserService(User);
  * @param {*} args
  */
 const run = async (message, args) => {
+    const prefix = process.env.PREFIX || '!';
     try {
         await svc.updateByDiscordId(message.author.id, { enrolled: false });
         message.author.send(
-            'Aww, it is sad to see you go. Hope we will meet again 😃'
+            `**Pairings stopped!** It is sad to see you go, but you can \`${prefix + 'start'}\` again anytime 👋`
         );
     } catch (e) {
         message.author.send(e.message);
