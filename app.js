@@ -25,8 +25,7 @@ const isInvalidMessage = (message) => {
     // Ignore messages that aren't for this bot to bother
     return (
         !message.content.startsWith(prefix) ||
-        message.author.bot ||
-        message.channel.type !== 'dm'
+        message.author.bot
     );
 };
 
@@ -42,6 +41,11 @@ const unknownCommandHandler = {
 const commandRegistry = buildCommandRegistry();
 
 client.on('message', (message) => {
+    if (message.channel.type !== 'dm' && message.mentions.members.has(client.user.id)) {
+        message.channel.send('**Coffee Buddy** ☕️ is a bot that pairs you with a new Fellow every week so you can make new lifelong friends while working remotely. Send me a private message to get started! ✨');
+        return;
+    }
+
     if (isInvalidMessage(message)) return;
 
     // Remove irc username suffix
