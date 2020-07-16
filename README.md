@@ -20,10 +20,10 @@ This project uses [dotenv](https://github.com/motdotla/dotenv) to load environme
 * `BOT_TOKEN`: get your Discord bot token in the Discord Developer Portal.
 * `GUILD_ID`: the ID of your Discord guild.
 * `PREFIX`: specify this variable if you’d like to set up a different prefix for the commands (default is currently `!`).
-* `DB_NAME`
-* `DB_USERNAME`
-* `DB_PASSWORD`
-* `DB_HOST`
+* `DB_NAME`: database name
+* `DB_USERNAME`: database username
+* `DB_PASSWORD`: database username password
+* `DB_HOST`: URL where the database is hosted
 
 ### Setting up the database
 After installing the dependencies and ensuring MySQL is running, run the command `npx sequelize-cli db:migrate`.
