@@ -45,6 +45,7 @@ const createChannel = async (client, userOne, userTwo) => {
 
     textChannel.updateOverwrite(guild.roles.everyone, channelPermission);
     voiceChannel.updateOverwrite(guild.roles.everyone, channelPermission);
+
     textChannel.send(`Hello, welcome ${userOneObj} and ${userTwoObj}! ✨`);
 }
 

@@ -1,7 +1,9 @@
 require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
+const cron = require('node-cron');
 const Discord = require('discord.js');
+const scheduler = require('./helpers/scheduler');
 
 // Use exclamation mark as the default prefix
 const prefix = process.env.PREFIX || '!';
@@ -56,5 +58,11 @@ client.on('message', (message) => {
     handler.run(message, args); // Run the command's run function
 });
 
-client.once('ready', () => console.log('The bot is now ready!'));
 client.login(process.env.BOT_TOKEN);
+client.once('ready', () =>  {
+    console.log('The bot is now ready!');
+    // Runs this function every minute (for testing purposes)
+    cron.schedule('1 * * * * *', () => {
+        scheduler(client);
+    });
+});
