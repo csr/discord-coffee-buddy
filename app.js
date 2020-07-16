@@ -20,9 +20,9 @@ const buildCommandRegistry = () => {
 };
 
 const isInvalidMessage = (message) => {
-    // Ignore messages in public places (for now) 'dm
-    // Ignore other bot messages - message.author.bot
     // Ignore messages that aren't for this bot to bother
+    // Ignore other bot messages - message.author.bot
+    // Ignore messages that aren't a DM
     return (
         !message.content.startsWith(prefix) ||
         message.author.bot ||
@@ -33,13 +33,22 @@ const isInvalidMessage = (message) => {
 const unknownCommandHandler = {
     run: (message, args) => {
         message.author.send(
-            "I didn't understand that command. Here are the supported commands."
+            'Oh shoot. Couldn\'t understand that. Here are the commands that I obey, my lord.'
         );
         commandRegistry['help'].run(message, args);
     },
 };
 
 const commandRegistry = buildCommandRegistry();
+
+client.once('ready', () =>  {
+    console.log('The bot is now ready!');
+
+    // Runs this function every minute (for testing purposes)
+    // cron.schedule('1 * * * * *', () => {
+        scheduler(client);
+    // });
+});
 
 client.on('message', (message) => {
     // Handle public mentions
@@ -65,10 +74,3 @@ client.on('message', (message) => {
 });
 
 client.login(process.env.BOT_TOKEN);
-client.once('ready', () =>  {
-    console.log('The bot is now ready!');
-    // Runs this function every minute (for testing purposes)
-    cron.schedule('1 * * * * *', () => {
-        scheduler(client);
-    });
-});

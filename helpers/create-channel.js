@@ -53,7 +53,36 @@ const createChannel = async (client, userOne, userTwo) => {
     textChannel.updateOverwrite(guild.roles.everyone, channelPermission);
     voiceChannel.updateOverwrite(guild.roles.everyone, channelPermission);
 
-    textChannel.send(`Hello, welcome ${userOneObj} and ${userTwoObj}! ✨ Why don't you two pick a time to meet digitally for a casual 1-on-1?`);
+    textChannel.send(`Hello, welcome ${userOneObj} and ${userTwoObj}! 👋`);
+    textChannel.send(`You've been paired together to schedule an informal chat to get to know each other. Pick a time to meet digitally for a casual 1-on-1 this week! ✨`);
+    textChannel.send('Here\'s some **suggested questions** you can ask in the call to get started:')
+    
+    const suggestedQuestions = [
+        "Are there any projects you’d really like to work on if you were given the opportunity?",
+        "What do you want to be doing in 5 years? 10 years? 3 years?",
+        "Who do you really admire? Why?",
+        "What are your super powers? What powers would you like to develop?",
+        "How did you get started coding?",
+        "What's a project you worked on recently that you're proud of? Why?",
+        "What skills would you like to develop right now?",
+        "What do you like to do in your free time? What are your hobbies?",
+        "What drives you? What motivates you to do your best each day?",
+        "When you get stuck on something, what is your process for getting unstuck?"
+    ]
+
+    var chosenQuestions = []
+
+    for (var i = 0; i < 3; i++) {
+        const index = Math.floor(Math.random()*suggestedQuestions.length);
+        const question = suggestedQuestions[index];
+
+        // Delete to avoid repeated questions
+        suggestedQuestions.splice(index, 1);
+
+        chosenQuestions.push('- ' + question);
+    }
+
+    textChannel.send(chosenQuestions.join('\n'));
 
     const userOneDB = await svc.getUser(userOneObj.id);
     const userTwoDB = await svc.getUser(userTwoObj.id);
