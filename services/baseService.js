@@ -13,6 +13,18 @@ class BaseService {
             throw new Error(this.prettifyError(error));
         }
     };
+    findAll = async (query, attributes) => {
+        try {
+            const result = await this.model.findAll({
+                where: query,
+                raw: true,
+                attributes,
+            });
+            return result;
+        } catch (error) {
+            throw new Error(this.prettifyError(error));
+        }
+    };
     findOne = async (query) => {
         try {
             const obj = await this.model.findOne({
