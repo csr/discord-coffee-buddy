@@ -45,6 +45,14 @@ class UserService extends BaseService {
         const updatedBody = await this.update(updateBody, { discordId });
         return updatedBody;
     };
+
+    getUser = async (discordId) => {
+        try {
+            return await this.findOne({ discordId });
+        } catch (error) {
+            return false;
+        }
+    };
 }
 module.exports = { UserService };
 
