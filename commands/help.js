@@ -8,42 +8,24 @@ const { Message, MessageEmbed } = require('discord.js');
  */
 const run = (message, args) => {
     const prefix = process.env.PREFIX || '!';
-    const embed = new MessageEmbed({
-        setTitle: 'Coffee Buddy Commands!',
-        setDescription: 'Here is the list of commands available for you to interact with this bot',
-        fields: [
-            {
-                value: '✨ Start the pairing session',
-                name: prefix + 'start',
-                inline: true
-            },
-            {
-                value: '🛑 Stop the pairing session',
-                name: prefix + 'stop',
-                inline: true
-            },
-            {
-                value: '💖 Set your pronouns',
-                name: prefix + 'pronouns <pronun>',
-                inline: true
-            },
-            {
-                value: '💻 Share your GitHub profile',
-                name: prefix + 'github <url>',
-                inline: true
-            },
-            {
-                value: '💼 Share your LinkedIn profile',
-                name: prefix + 'linkedin <url>',
-                inline: true
-            },
-            {
-                value: '🐙 Share a fun fact about yourself',
-                name: prefix + 'funfact <your fun fact>',
-                inline: true
-            }
-        ]
-    });
+    const embed = new MessageEmbed()
+        .setTitle('Commands')
+        .setDescription('Tell me more about yourself and I\'ll share your profile with future buddies.')
+        .addFields(
+            { value: prefix + 'start', name: '✨ Start pairings', inline: true },
+            { value: prefix + 'stop', name: '🛑 Stop pairings', inline: true },
+        )
+        .addFields(
+            { value: prefix + 'linkedin <url>', name: '💼 Share your LinkedIn', inline: true },
+            { value: prefix + 'bio <about me>', name: '💬 Share bio', inline: true },
+        )
+        .addFields(
+            { value: prefix + 'pronouns <pronouns>', name: '💖 Set your pronouns', inline: true },
+            { value: prefix + 'github <url>', name: '💻 Share your GitHub', inline: true },
+        )
+        .addFields(
+            { value: prefix + 'profile', name: '👤 View your profile', inline: true },
+        );
 
     return message.author.send(embed);
 };

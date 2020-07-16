@@ -15,7 +15,7 @@ const run = async (message, args) => {
         await svc.updateByDiscordId(message.author.id, {
             github: args,
         });
-        message.author.send('Yay! We have set your github profile to ' + args);
+        message.author.send('**Success!** 🐙 Your new GitHub profile link is ' + args);
     } catch (error) {
         message.author.send(error.message);
     }

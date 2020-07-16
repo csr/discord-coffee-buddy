@@ -17,7 +17,7 @@ const run = async (message, args) => {
             username: message.author.username,
         });
         message.author.send(
-            'Yay! It is happy to see you. You are now enrolled 😃'
+            'Yay, I\'ll pair you with someone new every week! I hope you\'ll make new lifelong friends ✨ In the meantime, you can build your profile.'
         );
     } catch (e) {
         message.author.send(e.message);

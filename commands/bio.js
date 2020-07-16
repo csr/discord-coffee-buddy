@@ -15,7 +15,8 @@ const run = async (message, args) => {
         await svc.updateByDiscordId(message.author.id, {
             funfact: args,
         });
-        message.author.send('Yay! We have set your funfact as to'  + args);
+        message.author.send('**Success!** 💬 Your new bio: '  + args);
+        
     } catch (error) {
         message.author.send(error.message);
     }
@@ -23,6 +24,6 @@ const run = async (message, args) => {
 
 module.exports = {
     run,
-    name: 'funfact',
-    description: 'Say us our funfact.',
+    name: 'bio',
+    description: 'Tell us something about yourself.',
 };
