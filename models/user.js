@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     discordId: DataTypes.STRING,
     linkedin: DataTypes.STRING,
     github: DataTypes.STRING,
-    funfact: DataTypes.STRING,
+    bio: DataTypes.STRING,
     pronouns: DataTypes.STRING,
     enrolled: DataTypes.BOOLEAN
   }, {

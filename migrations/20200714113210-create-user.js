@@ -24,7 +24,7 @@ module.exports = {
                 type: Sequelize.STRING,
                 default: '',
             },
-            funfact: {
+            bio: {
                 type: Sequelize.STRING,
                 default: '',
             },

@@ -13,7 +13,7 @@ const svc = new UserService(User);
 const run = async (message, args) => {
     try {
         await svc.updateByDiscordId(message.author.id, {
-            funfact: args,
+            bio: args,
         });
         message.author.send('**Success!** 💬 Your new bio: '  + args);
         
