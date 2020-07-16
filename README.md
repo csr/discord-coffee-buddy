@@ -6,6 +6,14 @@ This is a Discord bot that facilitates informal 1:1 coffee chats by randomly cho
 ## About
 This is a [Node.js](https://nodejs.org/en/) project that uses the [discord.js](https://discord.js.org/) library to communicate with the Discord API. There are several commands users can interact with to start getting paired with somebody else from the organization. To get started using the bot, users need to opt-in by using the start command. After activating the service, users can build a profile consisting of social links (LinkedIn, GitHub) which will be shared with the match to facilitate the conversation. This information is saved on a database (more information on how to connect the database will be shared later) to which we connect with [Sequelize](https://sequelize.org/).
 
+## Features
+Coffee Buddy was designed to ensure the best experience 💖 Here are some of its most notable features:
+* Automated no-human-needed pairings ✨
+* Human-friendly responses which foster an inclusive community 🌈 (users can set pronouns)
+* User profiles that showcase pronouns LinkedIn, GitHub, bio links to facilitate the conversation ☕️
+* Easy integration with an external database (any!) 💁🏼‍♂️
+
+
 ## Usage
 ### Setting up environment variables
 This project uses [dotenv](https://github.com/motdotla/dotenv) to load environment variables from `.env` file. You’ll need to create a `.env` file and declare the following keys:
