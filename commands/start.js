@@ -2,6 +2,7 @@ require('dotenv').config();
 const { Message } = require('discord.js');
 const { UserService } = require('../services/userService.js');
 const { User } = require('../models');
+const runHelp = require('./help.js');
 
 const svc = new UserService(User);
 
@@ -19,6 +20,8 @@ const run = async (message, args) => {
         message.author.send(
             'Yay, I\'ll pair you with someone new every week! I hope you\'ll make new lifelong friends ✨ In the meantime, you can build your profile.'
         );
+        const runHelp = require('commands/help');
+        runHelp.run(message, args)
     } catch (e) {
         message.author.send(e.message);
     }
