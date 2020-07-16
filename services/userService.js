@@ -3,12 +3,14 @@
 const { User } = require('../models');
 const { BaseService } = require('./baseService');
 const Sequelize = require('sequelize');
+
+const prefix = process.env.PREFIX || '!';
 class UserService extends BaseService {
     assertUserIsRegistered = async (discordId) => {
         const user = await this.userExists(discordId);
         if (!user || !user.enrolled) {
             throw new Error(
-                "It seems you're not enrolled. Type `!start` to enroll right away!"
+                `It seems you're not enrolled. Type \`${prefix + 'start'}\` to enroll right away!`
             );
         }
     };
@@ -42,6 +44,14 @@ class UserService extends BaseService {
         await this.assertUserIsRegistered(discordId);
         const updatedBody = await this.update(updateBody, { discordId });
         return updatedBody;
+    };
+
+    getUser = async (discordId) => {
+        try {
+            return await this.findOne({ discordId });
+        } catch (error) {
+            return false;
+        }
     };
 }
 module.exports = { UserService };

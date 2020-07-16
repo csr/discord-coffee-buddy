@@ -51,6 +51,12 @@ client.once('ready', () =>  {
 });
 
 client.on('message', (message) => {
+    // Handle public mentions
+    if (message.channel.type !== 'dm' && message.mentions.members.has(client.user.id)) {
+        message.channel.send('**Coffee Buddy** ☕️ is a bot that pairs you with a new Fellow every week so you can make new lifelong friends while working remotely. Send me a private message to get started! ✨');
+        return;
+    }
+
     if (isInvalidMessage(message)) return;
 
     // Remove irc username suffix
