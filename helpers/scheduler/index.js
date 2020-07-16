@@ -51,20 +51,47 @@ const getRandomUsers = async () => {
 
 /**
  * 
+ * @param {string[]} userArray 
+ * @param {Client} client
+ */
+const checkForOddUser = (userArray, client) => {
+    const totalPairs = userArray.length;
+    const lastPair = userArray[totalPairs - 1];
+    const isOddPair = lastPair.length % 2;
+
+    if (isOddPair) {
+        delete userArray[totalPairs - 1];
+        
+        // FIXME Could not send message to user directly
+        // We have to fetch memebers from guild and then send them a message
+
+        // const oddUser = client.users.cache.get(lastPair[0]);
+        // oddUser.dmChannel.send(
+        //     'Hey 👋. We couldn\'t pair you this week. We will make sure you get paired next week'
+        // );
+
+        return userArray;
+    }
+
+    return userArray;
+}
+
+/**
+ * 
  * @param {Client} client 
  */
 const runScheduler = async (client) => {
     console.log('Running the scheduler. Time to match people up. Yuhu!');
 
-    const users = await getRandomUsers();
+    const rawUsers = await getRandomUsers();
+    const users = checkForOddUser(rawUsers, client);
 
-    // FIXME: There is a serious bug invovled which needs to be fixed ASAP
-    // If the array that is being returned is not a pair, then this function would fail
-    // We need to handle this edge case and report it gracefully
     for (const pair of users) {
+        if (pair === undefined) return ;
+
         // TODO: Save into meetings category
         // For now just creates the channels required.
-        createChannel(client, pair[0], pair[1])
+        createChannel(client, pair[0], pair[1]);
     }
 }
 
