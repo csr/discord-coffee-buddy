@@ -33,7 +33,7 @@ const shuffleArray = (array) => {
 
 const getRandomUsers = async () => {
     let userIDSet = [];
-    const users = await svc.findAll();
+    const users = await svc.findAll({ enrolled: true });
 
     if (!Object.keys(users).length) {
         console.log('DAMN! There are no users enrolled yet. What a bummer!');
