@@ -1,3 +1,5 @@
+![logo](readme-logo.png)
+
 # Discord Coffee Buddy - MLH Halfway Hackathon
 This is a Discord bot that facilitates informal 1:1 coffee chats by randomly choosing between fellows, mentors, and maintainers who opt-in. ☕ The theme for this hack addresses: "Community Building – Create a project that helps foster connections between fellows, mentors, and maintainers.". In a remote environment, it's as important as ever to meet people and make new friends!
 
