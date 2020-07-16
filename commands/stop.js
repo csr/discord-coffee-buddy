@@ -14,7 +14,7 @@ const run = async (message, args) => {
     try {
         await svc.updateByDiscordId(message.author.id, { enrolled: false });
         message.author.send(
-            'Aww, it is sad to see you go. Hope we will meet again 😃'
+            '**Pairings stopped!** It is sad to see you go, but you can `!start` again anytime 👋'
         );
     } catch (e) {
         message.author.send(e.message);
