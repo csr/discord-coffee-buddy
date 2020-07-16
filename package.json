@@ -5,7 +5,8 @@
     "main": "app.js",
     "scripts": {
         "start": "node .",
-        "watch": "nodemon ."
+        "watch": "nodemon .",
+        "sq": "sequelize"
     },
     "repository": {
         "type": "git",
@@ -27,6 +28,7 @@
     },
     "devDependencies": {
         "@types/node-cron": "^2.0.3",
+        "@types/sequelize": "^4.28.9",
         "eslint": "^7.4.0",
         "nodemon": "^2.0.4",
         "sequelize-cli": "^6.2.0"
