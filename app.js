@@ -2,12 +2,12 @@ require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 const cron = require('node-cron');
+const Discord = require('discord.js');
 const scheduler = require('./helpers/scheduler');
-const { Client, Message } = require('discord.js');
 
 // Use exclamation mark as the default prefix
 const prefix = process.env.PREFIX || '!';
-const client = new Client();
+const client = new Discord.Client();
 
 const buildCommandRegistry = () => {
     const commandRegistry = {};
@@ -24,60 +24,49 @@ const isInvalidMessage = (message) => {
     // Ignore other bot messages - message.author.bot
     // Ignore messages that aren't a DM
     return (
-        !message.content.startsWith(prefix) ||
-        message.author.bot
+        message.author.bot ||
+        message.channel.type !== 'dm'
     );
 };
 
+const commandRegistry = buildCommandRegistry();
+
 const unknownCommandHandler = {
     run: (message, args) => {
-        message.author.send(
-            'Oh shoot. Couldn\'t understand that. Here are the commands that I obey, my lord.'
-        );
-        commandRegistry['help'].run(message, args);
+        // Send welcome if it's the first time user messages bot
+        message.channel.messages.fetch().then(messages => {
+            const botMessages = messages.filter(msg => msg.author.bot);
+            if (botMessages.size === 0) {
+                message.author.send(`👋😃 Hello! \n\nI'm here to help you get to know new Fellows from other Pods. If you decide to participate, I'll pair you with a new person every week for a short, informal, and fun 1-on-1. It's a great way to get to know more people when working remotely! 🙌\n\nAll you have to do is reply here with **${prefix + 'start'}**. You'll be to able to **${prefix + 'stop'}** anytime.`);
+            } else {
+                message.author.send(
+                    `Oh shoot. I couldn't understand that. Here are the commands I respond to. Make sure you prefix them with **${prefix}**.`
+                );
+                commandRegistry['help'].run(message, args);
+            }
+            }).catch(err => {
+                console.log(err);
+        });
     },
 };
 
-/**
- * 
- * @param {Message} message 
- */
-const isNewUser = async (message) => {
-    const dmMessages = await message.channel.messages.fetch();
-    const botMessages = dmMessages.filter(msg => msg.author.bot);
-
-    if (botMessages) {
-        return false;
-    }
-
-    await message.author.send('👋😃 Hello! I\'m here to help you get to know new Fellows from other Pods.')
-    await message.author.send('If you decide to participate, I\'ll pair you with a new person every week for a short, informal, and fun 1-on-1. It\'s a great way to get to know more people when working remotely!');
-    await message.author.send(`🙌 To enroll yourself into this, enter **${prefix}start**. You can also see other available commands by entering **${prefix}help**`);
-
-    return true;
-}
-
-const commandRegistry = buildCommandRegistry();
 
 client.once('ready', () =>  {
     console.log('The bot is now ready!');
 
-    // Runs this function once every monday.
-    // cron.schedule('* * * * * 1', () => {
-    //     scheduler(client);
+    // Runs this function every minute (for testing purposes)
+    // cron.schedule('1 * * * * *', () => {
+        // scheduler(client);
     // });
 });
 
-client.on('message', async (message) => {
+client.on('message', (message) => {
     // Handle public mentions
     if (message.channel.type !== 'dm' && message.mentions.members.has(client.user.id)) {
         message.channel.send('**Coffee Buddy** ☕️ is a bot that pairs you with a new Fellow every week so you can make new lifelong friends while working remotely. Send me a private message to get started! ✨');
         return;
     }
 
-    if (message.channel.type !== 'dm') return;
-
-    if (await isNewUser(message)) return;
     if (isInvalidMessage(message)) return;
 
     // Remove irc username suffix

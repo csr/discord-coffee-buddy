@@ -10,7 +10,7 @@ class UserService extends BaseService {
         const user = await this.userExists(discordId);
         if (!user || !user.enrolled) {
             throw new Error(
-                `It seems you're not enrolled. Type \`${prefix + 'start'}\` to enroll right away!`
+                `It seems you're not enrolled. Type **${prefix + 'start'}** to enroll right away!`
             );
         }
     };
