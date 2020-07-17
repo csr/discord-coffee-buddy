@@ -50,9 +50,9 @@ const isNewUser = async (message) => {
         return false;
     }
 
-    message.author.send('👋😃 Hello! I\'m here to help you get to know new Fellows from other Pods.')
-    message.author.send('If you decide to participate, I\'ll pair you with a new person every week for a short, informal, and fun 1-on-1. It\'s a great way to get to know more people when working remotely!');
-    message.author.send(`🙌 To enroll yourself into this, enter **${prefix}start**. You can also see other available commands by entering **${prefix}help**`);
+    await message.author.send('👋😃 Hello! I\'m here to help you get to know new Fellows from other Pods.')
+    await message.author.send('If you decide to participate, I\'ll pair you with a new person every week for a short, informal, and fun 1-on-1. It\'s a great way to get to know more people when working remotely!');
+    await message.author.send(`🙌 To enroll yourself into this, enter **${prefix}start**. You can also see other available commands by entering **${prefix}help**`);
 
     return true;
 }
