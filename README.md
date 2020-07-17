@@ -60,6 +60,9 @@ Set up your profile. These answers are saved in a database for easy retrieval.
 When two users are paired together, a private hidden channel is created and the users' profiles are shared to facilitate the conversation.
 ![match](images/match.png)
 
+Public mentions are handled gracefully.
+![public_mention](images/public_mention.png)
+
 ### Contributions
 
 Contributions are welcome. Just create a pull request and someone would attend to it.
