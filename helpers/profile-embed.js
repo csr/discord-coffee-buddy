@@ -9,7 +9,7 @@ const getUserProfileEmbed = (userDiscordObj, userDBObj) => {
             { name: '💖 Pronouns', value: userDBObj.pronouns || '*Not set*' },
             { name: '💻 GitHub', value: userDBObj.github || '*Not set*' },
             { name: '💼 LinkedIn', value: userDBObj.linkedin || '*Not set*' },
-            { name: '🐙 Fun fact', value: userDBObj.funfact || '*Not set*' },
+            { name: '🐙 Bio', value: userDBObj.bio || '*Not set*' },
         );
 }
 
