@@ -2,12 +2,12 @@ require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 const cron = require('node-cron');
-const Discord = require('discord.js');
 const scheduler = require('./helpers/scheduler');
+const { Client, Message } = require('discord.js');
 
 // Use exclamation mark as the default prefix
 const prefix = process.env.PREFIX || '!';
-const client = new Discord.Client();
+const client = new Client();
 
 const buildCommandRegistry = () => {
     const commandRegistry = {};
@@ -25,8 +25,7 @@ const isInvalidMessage = (message) => {
     // Ignore messages that aren't a DM
     return (
         !message.content.startsWith(prefix) ||
-        message.author.bot ||
-        message.channel.type !== 'dm'
+        message.author.bot
     );
 };
 
@@ -39,24 +38,46 @@ const unknownCommandHandler = {
     },
 };
 
+/**
+ * 
+ * @param {Message} message 
+ */
+const isNewUser = async (message) => {
+    const dmMessages = await message.channel.messages.fetch();
+    const botMessages = dmMessages.filter(msg => msg.author.bot);
+
+    if (botMessages) {
+        return false;
+    }
+
+    message.author.send('👋😃 Hello! I\'m here to help you get to know new Fellows from other Pods.')
+    message.author.send('If you decide to participate, I\'ll pair you with a new person every week for a short, informal, and fun 1-on-1. It\'s a great way to get to know more people when working remotely!');
+    message.author.send(`🙌 To enroll yourself into this, enter **${prefix}start**. You can also see other available commands by entering **${prefix}help**`);
+
+    return true;
+}
+
 const commandRegistry = buildCommandRegistry();
 
 client.once('ready', () =>  {
     console.log('The bot is now ready!');
 
-    // Runs this function every minute (for testing purposes)
-    // cron.schedule('1 * * * * *', () => {
-        scheduler(client);
+    // Runs this function once every monday.
+    // cron.schedule('* * * * * 1', () => {
+    //     scheduler(client);
     // });
 });
 
-client.on('message', (message) => {
+client.on('message', async (message) => {
     // Handle public mentions
     if (message.channel.type !== 'dm' && message.mentions.members.has(client.user.id)) {
         message.channel.send('**Coffee Buddy** ☕️ is a bot that pairs you with a new Fellow every week so you can make new lifelong friends while working remotely. Send me a private message to get started! ✨');
         return;
     }
 
+    if (message.channel.type !== 'dm') return;
+
+    if (await isNewUser(message)) return;
     if (isInvalidMessage(message)) return;
 
     // Remove irc username suffix
