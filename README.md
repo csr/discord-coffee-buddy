@@ -47,6 +47,18 @@ Run the command `npx sequelize-cli db:migrate`. This applies the migrations with
 
 `npm run start` starts a application as a regular node application.
 
+### User Flow
+Welcome to Fellowship Buddy!
+![welcome](images/welcome.png)
+
+Ask for help anytime.
+![help](images/help.png)
+
+Set up your profile. These answers are saved in a database for easy retrieval.
+![profile](images/profile.png)
+
+When two users are paired together, a private hidden channel is created and the users' profiles are shared to facilitate the conversation.
+![match](images/match.png)
 
 ### Contributions
 
