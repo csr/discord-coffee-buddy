@@ -63,9 +63,9 @@ client.once('ready', () =>  {
     console.log('The bot is now ready!');
 
     // Runs this function once every monday.
-    cron.schedule('* * * * * 1', () => {
-        scheduler(client);
-    });
+    // cron.schedule('* * * * * 1', () => {
+    //     scheduler(client);
+    // });
 });
 
 client.on('message', async (message) => {
