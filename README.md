@@ -1,4 +1,4 @@
-![logo](readme-logo.png)
+![logo](images/logo.png)
 
 # Discord Coffee Buddy - MLH Halfway Hackathon
 
