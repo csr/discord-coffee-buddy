@@ -24,7 +24,6 @@ const isInvalidMessage = (message) => {
     // Ignore other bot messages - message.author.bot
     // Ignore messages that aren't a DM
     return (
-        !message.content.startsWith(prefix) ||
         message.author.bot ||
         message.channel.type !== 'dm'
     );
@@ -32,10 +31,20 @@ const isInvalidMessage = (message) => {
 
 const unknownCommandHandler = {
     run: (message, args) => {
-        message.author.send(
-            'Oh shoot. Couldn\'t understand that. Here are the commands that I obey, my lord.'
-        );
-        commandRegistry['help'].run(message, args);
+        // Send welcome if it's the first time user messages bot
+        message.channel.messages.fetch().then(messages => {
+            const botMessages = messages.filter(msg => msg.author.bot);
+            if (botMessages.size === 0) {
+                commandRegistry['hi'].run(message, args);
+            } else {
+                message.author.send(
+                    `Oh shoot. I couldn't understand that. Here are the commands I respond to. Make sure you prefix them with **${prefix}**.`
+                );
+                commandRegistry['help'].run(message, args);
+            }
+            }).catch(err => {
+                console.log(err);
+        });
     },
 };
 
