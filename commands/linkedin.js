@@ -15,7 +15,7 @@ const run = async (message, args) => {
         await svc.updateByDiscordId(message.author.id, {
             linkedin: args,
         });
-        message.author.send('**Success!** 💼 Your new LinkedIn profile link is ' + args);
+        message.author.send('**Success!** 💼 Your new LinkedIn profile link is ' + '\*\*' + args + '\*\*');
     } catch (error) {
         message.author.send(error.message);
     }

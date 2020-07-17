@@ -15,7 +15,7 @@ const run = async (message, args) => {
         await svc.updateByDiscordId(message.author.id, {
             bio: args,
         });
-        message.author.send('**Success!** 💬 Your new bio: '  + args);
+        message.author.send('**Success!** 💬 Your new bio: '  + '\*\*' + args + '\*\*') ;
         
     } catch (error) {
         message.author.send(error.message);

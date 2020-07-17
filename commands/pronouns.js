@@ -15,7 +15,7 @@ const run = async (message, args) => {
         await svc.updateByDiscordId(message.author.id, {
             pronouns: args,
         });
-        message.author.send('**Success!** 💖 I\'ve set your pronouns to ' + args);
+        message.author.send('**Success!** 💖 I\'ve set your pronouns to ' + '\*\*'+ args + '\*\*');
     } catch (error) {
         message.author.send(error.message);
     }
